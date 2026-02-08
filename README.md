@@ -49,39 +49,38 @@ The database schema consists of three related tables:
 ```
 CREATE TABLE customers (
     customer_id SERIAL PRIMARY KEY,
-    full_name VARCHAR(100) NOT NULL,
-    region VARCHAR(50),
-    created_at DATE DEFAULT CURRENT_DATE
+    customer_name VARCHAR(100) NOT NULL,
+    region VARCHAR(50) NOT NULL,
+    registration_date DATE DEFAULT CURRENT_DATE
 );
 ```
 
-**_PRODUCTS_**
+**_SERVICES_**
 
 ```
-CREATE TABLE products (
-    product_id SERIAL PRIMARY KEY,
-    product_name VARCHAR(100) NOT NULL,
-    category VARCHAR(50),
-    price NUMERIC(10,2) NOT NULL
+CREATE TABLE services (
+    service_id SERIAL PRIMARY KEY,
+    service_name VARCHAR(100) NOT NULL,
+    service_type VARCHAR(50),
+    monthly_fee NUMERIC(10,2) NOT NULL
 );
 ```
 
-**_SALES_**
+**_TRANSACTIONS_**
 
 ```
-CREATE TABLE sales (
-    sale_id SERIAL PRIMARY KEY,
+CREATE TABLE transactions (
+    transaction_id SERIAL PRIMARY KEY,
     customer_id INT REFERENCES customers(customer_id),
-    product_id INT REFERENCES products(product_id),
-    quantity INT NOT NULL,
-    sale_date DATE NOT NULL,
-    total_amount NUMERIC(10,2) NOT NULL
+    service_id INT REFERENCES services(service_id),
+    transaction_date DATE NOT NULL,
+    amount_paid NUMERIC(10,2) NOT NULL
 );
 ```
 
 Each transaction references one customer and one service, forming one-to-many relationships.
 
-![ER Diagram](public/er_diagram.png)
+![ER Diagram](public/ER_Diagram.png)
 
 ---
 
@@ -124,7 +123,7 @@ WHERE t.transaction_id IS NULL;
 
 ---
 
-### 3. RIGHT JOIN - Services With No Sales
+### 3. RIGHT JOIN - Services With No Transactions
 
 ```sql
 SELECT
