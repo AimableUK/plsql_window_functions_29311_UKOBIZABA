@@ -276,4 +276,4 @@ The company should invest more in high-performing services, re-engage inactive c
 
 ## Integrity Statement
 
-"All sources were properly cited. All the Implementations and the analysis represent my original work. And No AI-generated content that I copied without adaptation."
+"All sources were properly cited. All the Implementations and the analysis represent my original work. And No AI-generated content that I copied."
